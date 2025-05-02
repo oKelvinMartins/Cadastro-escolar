@@ -1,24 +1,23 @@
 '''
 O que devo desenvolver?
 Implementar todas as funcionalidades já desenvolvidas (ex.: incluir e listar) para os demais módulos do sistema. Veja os dados necessários para cada um dos grupos abaixo:
-
-# Professores
+Professores
 Código do professor (Número inteiro)
 Nome do professor (String)
 CPF do professor (String)
-# Disciplinas
+Disciplinas
 Código da disciplina (Número inteiro)
 Nome da disciplina (String)
-# Turmas
+Turmas
 Código da turma (Número inteiro)
 Código do professor (Número inteiro)
 Código da disciplina (Número inteiro)
-# Matrículas
+Matrículas
 Código da turma (Número inteiro)
 Código do estudante (Número inteiro)
 Validação de dados na manipulação de turmas e matrículas (verificar se um código já existe antes de incluir uma nova turma/matrícula com o mesmo código).
 
-# O que meu sistema deve ter no final? (checklist)
+O que meu sistema deve ter no final? (checklist)
 As quatro operações básicas (incluir/listar/atualizar/excluir) para todos os módulos (estudantes/professores/disciplinas/turmas/matrículas) do sistema.
 Utilização de estruturas condicionais (if/elif/else) no código.
 Utilização de estruturas de repetição (for ou while) para navegação dos menus
@@ -29,7 +28,27 @@ As funções devem ser utilizadas seguindo boas práticas de programação.
 Se possível, reaproveitar funções para diferentes módulos do sistema (ex.: uma única função para incluir registro de estudantes, professores, disciplinas, turmas e matrículas).
 Validações de dados e controle de possíveis exceções/erros de execução (try/except).
 
-''' 
+'''
+
+'''
+
+
+'''
+
+'''
+Menu principal [ok]
+Menu operações 
+- Testes ok
+- Deixar menu modular 
+Menu estudantes 
+Menu displinas 
+Menu Professores 
+Menu turmas 
+Menu Matrículas 
+
+'''
+
+
 # Função - Salvar lista em JSON
 
 import json
@@ -107,7 +126,7 @@ def processar_menu_op(menu_op, arquivo):
 
 # Função - Incluir estudante
 
-def incluir_cadastros(codigo_existe,arquivo):
+def incluir_cadastros(codigo_existe, arquivo):
     cadastros = ler_lista_json(arquivo)
     print("\n[Incluir Estudante]")
     nome_cadastro = input("Nome: ").strip()
@@ -120,9 +139,9 @@ def incluir_cadastros(codigo_existe,arquivo):
     }
 
     if codigo_existe(codigo_cadastro, arquivo):
-        print("Já existe um estudante com esse código!")
+        print("Já existe um cadastro com esse código!")
     elif any(e["cpf"] == cpf_cadastro for e in cadastros):
-        print("Já existe um estudante com esse CPF!")
+        print("Já existe um cadastro com esse CPF!")
     else:
         cadastros.append(dados_cadastro)
         salvar_lista_json(cadastros, arquivo)
@@ -150,9 +169,9 @@ def incluir_disciplinas(arquivo):
 # Função - Listar cadastros
 
 
-def listar_cadastros(arquivo_cadastro):
-    cadastros = ler_lista_json(arquivo_cadastro)
-    print(f"\n[Listar cadastros - {arquivo_cadastro}]")
+def listar_cadastros(arquivo):
+    cadastros = ler_lista_json(arquivo)
+    print(f"\n[Listar cadastros - {arquivo}]")
     if not cadastros:
         print("Nenhum registro cadastrado.")
     else:
@@ -206,9 +225,10 @@ def excluir_cadastro(codigo, arquivo):
         salvar_lista_json(cadastros, arquivo)
         print("Estudante excluído com sucesso!")
 
-def validar_codigo(codigo, arquivo): 
+
+def validar_codigo(codigo, arquivo):
     codigo_validar = ler_lista_json(arquivo)
-    return any (item["codigo"] == codigo for item in codigo_validar)
+    return any(item["codigo"] == codigo for item in codigo_validar)
 
 
 # Programa Principal
@@ -251,5 +271,3 @@ while True:
         break
     else:
         print("Opção inválida. Tente novamente.")
-
-
